@@ -30,6 +30,18 @@ Accueil -> Catégorie -> Liste des artisans -> Fiche artisan -> Contact.
 
 ---
 
+## 🗄️ Modélisation de la base de données
+
+La base de données du projet **Trouve ton arisan** a été modélisée en amont à l'aide de la méthode **Merise**, afin de garantir la cohérence des données et le respect des règles métier avant toute implantation technique.
+
+un **Modèle Conceptuel de Données (MCD)** a été réalisé pour identifier les entités principales du système (Catégorie, Spécialité, Artisan), leurs attributs ainsi que les relations qui les lient.
+
+Les cardinalités définies dans le MCD traduisent fidèlement les contraintes fonctionnelles du projet, notamment :
+- l'appartenance d'une spécialité à une seule catégorie,
+- l'exercice d'une seule spécialité par artisan.
+
+Ce travail constitue la base de la phase suivante, consacrée à la transformation du MCD en **Modèle Logique de Données (MCD)**, puis à la création des tables de la base de données relationnelles MySQL.
+
 ## 🔗 Liens utiles
 
 - Dépôt GitHub : [https://github.com/Alexdessine/trouve-ton-artisan](https://github.com/Alexdessine/trouve-ton-artisan)
