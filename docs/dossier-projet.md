@@ -42,6 +42,14 @@ Les cardinalités définies dans le MCD traduisent fidèlement les contraintes f
 
 Ce travail constitue la base de la phase suivante, consacrée à la transformation du MCD en **Modèle Logique de Données (MCD)**, puis à la création des tables de la base de données relationnelles MySQL.
 
+A partir du **Modèle Conceptuel de Données (MCD)** validé, un **Modèle Logique de Données (MLD)** a été construit afin de préparer la création de la base de données relationnelle du projet **Trouve ton artisan**.
+
+Le MLD permet de définir : 
+
+- les tables de la base de données, 
+- les clés primaires,
+- les clés étrangères traduisant les relations entre les entités, tout en restant indépendant des choix techniques d'implémentation. 
+
 ## 🔗 Liens utiles
 
 - Dépôt GitHub : [https://github.com/Alexdessine/trouve-ton-artisan](https://github.com/Alexdessine/trouve-ton-artisan)
