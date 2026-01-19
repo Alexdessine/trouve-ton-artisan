@@ -1,11 +1,14 @@
-const express = require('express');
+const express = require("express");
+const categoriesRoutes = require("./categories.routes");
+const artisansRoutes = require("./artisans.routes");
+const contactRoutes = require("./contact.routes");
+
 const router = express.Router();
 
-router.use('/categories', require('./categories.routes'));
-router.use('/artisans', require('./artisans.routes'));
+router.use("/categories", categoriesRoutes);
+router.use("/artisans", artisansRoutes);
 
-router.get('/', (req, res) => {
-    res.status(200).json({ status: 'ok' });
-});
+// IMPORTANT : contactRoutes contient déjà "/contact"
+router.use("/", contactRoutes);
 
 module.exports = router;

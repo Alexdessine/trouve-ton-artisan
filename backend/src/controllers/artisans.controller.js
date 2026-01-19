@@ -1,4 +1,5 @@
 const artisansService = require('../services/artisans.service');
+const mailService = require("../services/mail.service");
 
 async function getAll(req, res, next) {
     try {
@@ -41,4 +42,33 @@ async function getFavori(req, res, next) {
     }
 }
 
-module.exports = { getAll, getById, getFavori };
+const postContactArtisan = async (req, res, next) => {
+    try {
+        const artisanId = Number(req.params.id);
+
+        const artisan = await artisansService.getArtisanById(artisanId);
+
+        if (!artisan) {
+            return res.status(404).json({
+                error: "Not Found",
+                message: "Artisan introuvable.",
+            });
+        }
+
+        const { nom, email, message } = req.body;
+
+        await mailService.sendMessageToArtisan({
+            artisan,
+            sender: { nom, email },
+            message,
+        });
+
+        return res.status(200).json({
+            message: "Message envoyé à l'artisan.",
+        });
+    } catch (err) {
+        return next(err);
+    }
+};
+
+module.exports = { getAll, getById, getFavori, postContactArtisan };

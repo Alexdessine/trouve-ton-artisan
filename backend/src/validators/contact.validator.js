@@ -22,7 +22,7 @@ const contactValidationRules = () => [
         .optional({ nullable: true})
         .custom((value) => {
             if (typeof value === "string" && value.trim() !== "") {
-                throw new Error("Requête rejetée (spam détectée");
+                throw new Error("Requête rejetée (spam détecté).");
             }
             return true;
         }),

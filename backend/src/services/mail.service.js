@@ -1,62 +1,73 @@
-const nodemailer = require('nodemailer');
-const ApiError = require('../utils/ApiError');
+const nodemailer = require("nodemailer");
 
 function buildTransporter() {
-    const host = process.env.MAIL_HOST;
-    const port = Number(process.env.MAIL_PORT);
-    const secure = String(process.env.MAIL_SECURE).toLowerCase() === 'true';
+    const host = process.env.SMTP_HOST;
+    const portRaw = process.env.SMTP_PORT;
+    const port = Number(portRaw);
+    const secure = String(process.env.SMTP_SECURE).toLowerCase() === "true";
 
-    if (!host || !port) {
-        throw new ApiError(500, "SMTP non configuré (variable d'environnement manquantes.)");
+    if (!host || !portRaw || Number.isNaN(port)) {
+        const err = new Error("SMTP non configuré (SMTP_HOST/SMTP_PORT manquants ou invalides).");
+        err.statusCode = 500;
+        throw err;
     }
 
-    const user = process.env.MAIL_USER || "";
-    const pass = process.env.MAIL_PASS || "";
+    const user = process.env.SMTP_USER || "";
+    const pass = process.env.SMTP_PASS || "";
+    const auth = user && pass ? { user, pass } : undefined;
 
-    const auth = user && pass ? { user, pass} : undefined;
-
-    return nodemailer.createTransport({
-        host,
-        port,
-        secure,
-        auth,
-    });
+    return nodemailer.createTransport({ host, port, secure, auth });
 }
 
-async function sendContactEmail({ nom, email, message }) {
+async function sendMessageToArtisan({ artisan, sender, message }) {
     const from = process.env.MAIL_FROM;
-    const to = process.env.MAIL_TO;
 
-    if (!from || !to) {
-        throw new ApiError(500, "MAIL_FROM / MAIL_TO non configurés.");
+    if (!from) {
+        const err = new Error("MAIL_FROM non configuré.");
+        err.statusCode = 500;
+        throw err;
+    }
+
+    // ⚠️ adapte si ton modèle n'utilise pas ces noms
+    const to = artisan.email;
+    const artisanName = artisan.nom;
+
+    if (!to) {
+        const err = new Error("Email de l'artisan indisponible.");
+        err.statusCode = 500;
+        throw err;
     }
 
     const transporter = buildTransporter();
 
-    const subject = `[Contact] Messsage de ${nom}`;
-    const text = `Nouveau message via le formulaire de contact
-    Nom : ${nom}
-    Email : ${email}
-    
-    Message :
-    ${message}`;
+    const subject = `[Trouve ton artisan] Message pour ${artisanName}`;
+    const text =
+        `Message envoyé via Trouve ton artisan
+
+Artisan : ${artisanName}
+De : ${sender.nom} <${sender.email}>
+
+Message :
+${message}
+`;
 
     try {
-        // En dev, Papercut intercepte : pas un "vrai" envoi externe.
         await transporter.sendMail({
             from,
-            to, 
-            replyTo: email,
+            to,
+            replyTo: sender.email,
             subject,
             text,
         });
     } catch (e) {
-        throw new ApiError(502, "Erreur lors de l'envoi SMTP.", {
-            details: e?.message || "Unknown SMTP error",
-        });
+        const err = new Error("Erreur lors de l'envoi SMTP.");
+        err.statusCode = 502;
+        err.details = e?.message;
+        throw err;
     }
 }
 
 module.exports = {
-    sendContactEmail,
+    // si tu avais déjà sendContactEmail, garde-le
+    sendMessageToArtisan,
 };

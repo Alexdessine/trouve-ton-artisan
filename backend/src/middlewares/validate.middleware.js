@@ -1,19 +1,19 @@
-const { validateResult } = require('express-validator');
-const ApiError = require('../utils/ApiError');
+const { validationResult } = require("express-validator");
 
 const validate = (req, res, next) => {
-    const errors = validateResult(req);
-    if (!errors.isEmpty()) {
-        // On envoie une erreur explicite et testable (Postman)
-        return next(
-            new ApiError(400, 'Validation Error', {
-                errors: errors.array().map((e) => ({
-                    field: e.path,
-                    message: e.msg,
-                })),
-            })
-        );
+    const result = validationResult(req);
+
+    if (!result.isEmpty()) {
+        return res.status(400).json({
+            error: "Validation error",
+            message: "Certains champs sont invalides.",
+            errors: result.array().map((e) => ({
+                field: e.path,
+                message: e.msg,
+            })),
+        });
     }
+
     next();
 };
 

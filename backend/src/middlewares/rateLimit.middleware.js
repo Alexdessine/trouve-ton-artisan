@@ -1,15 +1,14 @@
-const rateLimit = require('express-rate-limit');
+const rateLimit = require("express-rate-limit");
 
-// Exemple : 5 requêtes / 15 minutes / IP sur /api/contact
-const contactlimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // limit each IP to 5 requests per windowMs
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+const contactLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
     message: {
-        error: "Too many Requests",
-        messsage: "Trop de requêtes. Réssaie plus tard.",
+        error: "Too Many Requests",
+        message: "Trop de requêtes. Réessaie plus tard.",
     },
 });
 
-module.exports = { contactlimiter };
+module.exports = { contactLimiter };
