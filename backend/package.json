@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f ../.env nodemon ./bin/www"
+    "local": "env-cmd -f ../.env.local nodemon ./bin/www",
+    "prod": "env-cmd -f ../.env.prod nodemon ./bin/www",
+    "test": "env-cmd -f ../.env.gmail nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
