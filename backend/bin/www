@@ -1,4 +1,13 @@
 #!/usr/bin/env node
+const sequelize = require('../src/config/database');
+
+sequelize.authenticate()
+.then(() => {
+  console.log('Connection to the database has been established successfully.');
+})
+.catch((error) => {
+  console.error('Unable to connect to the database:', error);
+});
 
 /**
  * Module dependencies.

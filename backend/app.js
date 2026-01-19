@@ -1,4 +1,4 @@
-// require('dotenv').config({ path: './src/config/env/.env' });
+require('dotenv').config({ path: './src/config/database' });
 
 var createError = require('http-errors');
 var express = require('express');
