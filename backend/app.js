@@ -1,3 +1,5 @@
+// require('dotenv').config({ path: './src/config/env/.env' });
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,7 +13,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -35,7 +37,13 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    title: 'Error',
+    appName: 'Trouve ton artisan',
+    apiUrl: '',
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+  });
 });
 
 module.exports = app;
