@@ -11,6 +11,12 @@ var usersRouter = require('./src/routes/users');
 var apiRouter = require('./src/routes/api.routes');
 
 var app = express();
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+console.log("MAIL_FROM =", process.env.MAIL_FROM);
+console.log("MAIL_TO =", process.env.MAIL_TO);
+console.log("SMTP_HOST =", process.env.SMTP_HOST);
+console.log("SMTP_PORT =", process.env.SMTP_PORT);
+console.log("SMTP_SECURE =", process.env.SMTP_SECURE);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,15 +38,14 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  const status = err.status || 500;
-  res.status(status).json({
-    error: {
-      status,
-      message: err.message || 'Internal Server Error'
-    }
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+
+  return res.status(status).json({
+    error: status === 500 ? "Internal Server Error" : "Error",
+    message: err.message,
+    ...(err.details ? { details: err.details } : {}),
   });
 });
-
 
 module.exports = app;

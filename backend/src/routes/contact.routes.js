@@ -1,24 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const artisansController = require('../controllers/artisans.controller');
-const { body, param } = require("express-validator");
+const express = require("express");
+const { body } = require("express-validator");
 const { validate } = require("../middlewares/validate.middleware");
 const { contactLimiter } = require("../middlewares/rateLimit.middleware");
-const { postContactArtisan } = require("../controllers/artisans.controller");
+const { postContact } = require("../controllers/contact.controller");
 
-// IMPORTANT : /featured avant /:id
-router.get('/featured', artisansController.getFavori);
-router.get('/', artisansController.getAll);
-router.get('/:id', artisansController.getById);
+console.log({
+    contactLimiter: typeof contactLimiter,
+    validate: typeof validate,
+    postContact: typeof postContact,
+});
+
+const router = express.Router();
 
 router.post(
-    "/:id/contact",
+    "/contact",
     contactLimiter,
     [
-        param("id")
-            .notEmpty().withMessage("L'id artisan est requis.")
-            .isInt({ min: 1 }).withMessage("L'id artisan doit être un entier positif."),
-
         body("nom")
             .trim()
             .notEmpty().withMessage("Le champ 'nom' est requis.")
@@ -35,7 +32,7 @@ router.post(
             .notEmpty().withMessage("Le champ 'message' est requis.")
             .isLength({ min: 10, max: 2000 }).withMessage("Le champ 'message' doit contenir entre 10 et 2000 caractères."),
 
-        // Honeypot
+        // Honeypot: doit être vide
         body("website")
             .optional({ nullable: true })
             .custom((value) => {
@@ -46,7 +43,7 @@ router.post(
             }),
     ],
     validate,
-    postContactArtisan
+    postContact
 );
 
 module.exports = router;

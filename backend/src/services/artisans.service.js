@@ -41,4 +41,8 @@ async function getFavori() {
     });
 }
 
-module.exports = { getAll, getById, getFavori };
+const getArtisanById = async (id) => {
+    return Artisan.findByPk(id);
+};
+
+module.exports = { getAll, getById, getFavori, getArtisanById };
