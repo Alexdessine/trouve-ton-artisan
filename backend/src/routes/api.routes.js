@@ -7,8 +7,6 @@ const router = express.Router();
 
 router.use("/categories", categoriesRoutes);
 router.use("/artisans", artisansRoutes);
-
-// IMPORTANT : contactRoutes contient déjà "/contact"
-router.use("/", contactRoutes);
+router.use("/contact", contactRoutes);
 
 module.exports = router;
