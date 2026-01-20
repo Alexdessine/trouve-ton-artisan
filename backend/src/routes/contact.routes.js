@@ -4,16 +4,15 @@ const { validate } = require("../middlewares/validate.middleware");
 const { contactLimiter } = require("../middlewares/rateLimit.middleware");
 const { postContact } = require("../controllers/contact.controller");
 
-console.log({
-    contactLimiter: typeof contactLimiter,
-    validate: typeof validate,
-    postContact: typeof postContact,
-});
-
 const router = express.Router();
 
+/**
+ * POST /contact
+ * Remarque : selon le montage (app.use("/api", ...)),
+ * l'URL finale attendue sera typiquement : POST /api/contact
+ */
 router.post(
-    "/contact",
+    "/",
     contactLimiter,
     [
         body("nom")
