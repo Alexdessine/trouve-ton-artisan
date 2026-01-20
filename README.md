@@ -23,12 +23,12 @@ Ce projet s’inscrit dans un cadre **pédagogique et professionnalisant**.
 Le projet suit une architecture **simple-repo** :
 
 trouve-ton-artisan/
-
+```bash 
 ├── frontend/     # Application React (Vite)
 ├── backend/      # API REST Node.js / Express
 ├── database/     # Scripts SQL (MySQL)
 ├── docs/         # Documentation et dossier projet (PDF)
-
+```
 ## 🗄️ Base de données (MySQL)
 
 ⚠️ Important
@@ -130,6 +130,132 @@ mysql -u tta_user -p --default-character-set=utf8mb4 < 03_tests.sql
 
 ---
 
+## 🌐 API REST - Présentation
+
+L'application **Trouve ton artisan** repose sur **API REST publique** développée en **Node.js / Express**, connectée à une base de données **MySQL** via **Sequelize**. 
+
+L'API fournit les données nécessaire au frontend (React) et gère l'envoi de message via un formulaire de contact sécurisé.
+
+### Caractéristiques principales
+
+* API RES **publique** (sans authentification)
+* Echanges au format JSON
+* Architecture **stateless**
+* Séparation claire **frontend / backend**
+* Sécurité adaptée à une API ouverte (validation, CORS, rate limit)
+
+
+## 🔗 Endpoints disponibles
+
+### 📁 Catégories
+
+`GET /api/categories`
+Retourne la liste des catégories d'artisans.
+
+**Réponse (200)**
+```bash 
+[
+  {
+    "id": 1,
+    "label": "Alimentation"
+  },
+  {
+    "id": 2,
+    "label": "Bâtiment"
+  }
+]
+```
+
+
+### 👷 Artisans
+
+`GET /api/artisans`
+Retourne la liste complète des artisans.
+
+**Réponse (200)**
+``` bash 
+[
+  {
+    "id": 1,
+    "nom": "Boucherie Dumont",
+    "ville": "Lyon",
+    "note": 4.5,
+    "categorie": "Alimentation",
+    "specialite": "Boucher"
+  }
+]
+```
+
+`GET /api/artisans/:id`
+Retourne le détail d'un artisan
+
+**Paramètres**
+* `id` *(number)* : identifiant de l'artisan
+
+**Réponse (200)**
+```bash
+{
+  "id": 1,
+  "nom": "Boucherie Dumont",
+  "ville": "Lyon",
+  "note": 4.5,
+  "a_propos": "Lorem ipsum...",
+  "email": "contact@exemple.fr",
+  "site": null,
+  "categorie": "Alimentation",
+  "specialite": "Boucher"
+}
+```
+
+**Erreur possible**
+* `404` : artisan non trouvé
+
+### ✉️ Contact
+
+`POST /api/artisans/:id/contact`
+Permet l'envoi d'un message à un artisan via le formulaire de contact.
+
+**Champs attendus**
+
+* `nom` *(string, requis)*
+* `email` *(string, requis, format email)*
+* `message` *(string, requis)*
+* `website` *(string, honeypot - doit être vide)*
+
+**Exemple de requête**
+```bash
+{
+  "nom": "Jean Dupont",
+  "email": "jean.dupont@email.com",
+  "message": "Bonjour, je souhaite vous contacter.",
+  "website": ""
+}
+```
+
+**Réponses (200)**
+```bash
+{
+  "message": "Message envoyé avec succès"
+}
+```
+
+**Erreurs possibles**
+* `400` : validation des champs
+* `429` : trop de requêtes (rate limiting)
+
+## 🔐 Sécurité de l’API
+
+* Validation serveur des entrées (**express-validator**)
+* Protection anti-spam (**honeypot**)
+* **Rate limiting**
+  * global sur `/api`
+  * renforcé sur `/api/contact`
+* **CORS resctrictif** (origines autorisée uniquement)
+* Gestion centralisée des erreurs
+* Aucune stacktrace exposée en production
+
+---
+
 ## 🛠️ Technologies utilisées
 
 ### Frontend
@@ -156,7 +282,6 @@ mysql -u tta_user -p --default-character-set=utf8mb4 < 03_tests.sql
 ---
 ## 🔐 Sécurité & bonnes pratiques
 
-- Authentification JWT
 - Validation serveur des entrées
 - CORS restrictif
 - Rate limiting
