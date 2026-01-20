@@ -56,6 +56,45 @@ Ce modèle logique a ensuite servi de base à la création des scripts SQL perme
 - la définition des tables et des contraintes d'intégrité,
 - l'insertion d'un jeu de données de test cohérent.
 
+## 🌐 API REST – Présentation et rôle
+
+L'API REST constitue la **couche d'accès aux données** de l'application **Trouve ton artisan**.
+
+Elle permet : 
+
+* la consultation des catégories et artisans,
+* l'affichage des fiches détaillées,
+* l'envoi de messages via un formulaire sécurisé.
+
+Le frontend consomme exclusivement cette API via des requêtes HTTP.
+
+### 🧠 Choix techniques
+
+* **API REST publique**
+  * aucun compte utilisateur
+  * aucun système d'authentification
+* **Format JSON**
+* **Express + Sequelize**
+* **MySQL relationnel**
+* Architecture simple et pédagogique, adaptée à un projet de formation.
+
+### 🔁 Schéma logique simplifié (texte)
+
+Frontend (React)
+ -> Requêtes HTTP (GET/POST)
+ -> API REST Express
+ -> Sequelize
+ -> Base de données MySQL
+
+### 🔐 Sécurité de l’API
+
+Les mesures mises en place sont adaptées à une API ouverte :
+* validation stricte des données entrantes,
+* limitation du nombre de requêtes,
+* restriction des origines autorisées (CORS),
+* protection anti-spam sur le formulaire,
+* gestion centralisée des erreurs.
+
 ## 🔗 Liens utiles
 
 - Dépôt GitHub : [https://github.com/Alexdessine/trouve-ton-artisan](https://github.com/Alexdessine/trouve-ton-artisan)
