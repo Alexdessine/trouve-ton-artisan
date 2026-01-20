@@ -29,6 +29,35 @@ trouve-ton-artisan/
 ├── database/     # Scripts SQL (MySQL)
 ├── docs/         # Documentation et dossier projet (PDF)
 ```
+## 🎨 Frontend (React)
+
+Le frontend est une application web développée avec ReactJS, initialisée vite Vite, destinée à afficher plusieurs pages fonctionnelles
+
+### 🛠️ Technologies frontend
+
+* ReactJS (JSX)
+* Vite (outil de build)
+* Bootstrap
+* Sass
+
+### 📦 Installation
+
+```bash
+cd frontend
+npm install
+```
+### ▶️ Lancement en développement
+
+```bash
+npm run dev
+```
+Par défaut, l'application est accessible à l'adresse :
+
+```bash
+http://localhost:5173
+```
+
+
 ## 🗄️ Base de données (MySQL)
 
 ⚠️ Important
@@ -259,18 +288,15 @@ Permet l'envoi d'un message à un artisan via le formulaire de contact.
 ## 🛠️ Technologies utilisées
 
 ### Frontend
-- React (Vite)
-- React Router
+- ReactJS (Vite, JSX)
 - Bootstrap
 - Sass
-- Fetch API
-- react-helmet-async (SEO)
+(React Router, Fetch API et SEO prévus dans les phases suivantes)
 
 ### Backend
 - Node.js
 - Express
 - Sequelize
-- JWT (authentification)
 - MySQL
 
 ### Outils & environnement
