@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
+import {fetchCategories} from "../../services/api";
 
 /**
  * Header (structure)
@@ -9,12 +10,14 @@ import logo from "../../assets/img/logo.png";
  * - Recherche
  */
 export default function Header() {
-    const categories = [
-        {slug: "batiment", label: "Bâtiment"},
-        {slug: "services", label: "Services"},
-        {slug: "fabrication", label: "Fabrication"},
-        {slug: "alimentation", label: "Alimentation"},
-    ];
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        fetchCategories()
+            .then(setCategories)
+            .catch(() => setCategories([]));
+    }, []);
+
 
     return (
         <header>
@@ -23,32 +26,15 @@ export default function Header() {
                     <img src={logo} alt="Logo Trouve ton artisan" style={{ height: 50, display: "block" }} />
                 </Link>
 
-                {/* Menu catégories */}
-                <div style={{ display: "flex", gap: 12 }}>
-                    {categories.map(category => (
-                        <NavLink
-                            key={category.slug} to={`/${category.slug}`}>
-                            {category.label}
-                        </NavLink>
-                    ))}
-                </div>
-
-                {/* Espace */}
-                <div style={{ flex: 1 }}/>
-
-                {/* Recherche */}
-                <form role="search" onSubmit={(e) => e.preventDefault()}>
-                    <label htmlFor="q" style={{  marginRight: 8 }}>
-                        Rechercher
-                    </label>
-                    <input 
-                        id="q"
-                        name="q"
-                        type="search"
-                        placeholder="Nom d'un artisan..."
-                    />
-                </form>
+                {categories.map((cat) => (
+                    <NavLink key={cat.id} to={`/${cat.slug}`}>
+                        {cat.label}
+                    </NavLink>
+                ))}
             </nav>
         </header>
-    )
+    );
+
+    
+
 }
