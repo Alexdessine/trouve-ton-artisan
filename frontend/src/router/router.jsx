@@ -12,12 +12,14 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout />,
-        errorElement: <NotFoundPage />,
         children: [
             { index: true, element: <HomePage /> },
             { path: "artisans", element: <ArtisansPage /> },
             { path: "artisans/:id", element: <ArtisanDetailPage /> },
             { path: "legal", element: <LegalPage /> },
+
+            // Page 404 avec layout
+            { path: "*", element: <NotFoundPage /> },
         ],
     },
 ]);
