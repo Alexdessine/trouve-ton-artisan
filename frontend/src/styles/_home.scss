@@ -1,0 +1,35 @@
+/* Carousel "tuiles qui défilent" */
+
+.tta-carousel {
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 75%;
+    gap: 1rem;
+
+    overflow-x: auto;
+    padding: 0.25rem 0 0.75rem;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tta-carousel__item {
+    scroll-snap-align: start;
+}
+
+
+/* Tablet */
+@media (min-width: 768px) {
+    .tta-carousel {
+        grid-auto-columns: 45%;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+
+    .tta-carousel {
+        grid-auto-columns: 30%;
+    }
+}
