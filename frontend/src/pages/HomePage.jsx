@@ -3,6 +3,7 @@ import HowToFind from "../components/Home/HowToFind";
 import TopArtisansCarousel from "../components/Home/TopArtisans";
 import { fetchCategories } from "../services/categoriesApi";
 import { fetchArtisans } from "../services/artisansApi";
+import ArtisansCarousel from "../components/home/ArtisansCarousel";
 
 export default function HomePage() {
     const [categories, setCategories] = useState([]);
@@ -61,8 +62,7 @@ export default function HomePage() {
                 </ol>
             </section>
             <section className="Top">
-                <div className="separation"></div>
-                <h2 className="topArtisan">Top 3 des artisans</h2>
+                
             </section>
 
             {/* <HowToFind title="Comment trouver un artisan ?" steps={howSteps} /> */}
@@ -86,13 +86,18 @@ export default function HomePage() {
                 )}
             </section> */}
 
-            {!loading && !error && top3.length > 0 && <TopArtisansCarousel artisans={top3} />}
-            {!loading && !error && top3.length === 0 && (
+            
+
+            {!loading && !error && artisans.length > 0 && (
+                <ArtisansCarousel title="Top 3 des artisans" artisans={artisans} />
+            )}
+
+            {!loading && !error && artisans.length === 0 && (
                 <section className="container pb-4 text-body-secondary">
-                    <h2 className="section-title mb-3">Top 3 des artisans</h2>
-                    Aucun artisan favori disponible.
+                    Aucun artisan disponible.
                 </section>
             )}
+
         </main>
     );
 }

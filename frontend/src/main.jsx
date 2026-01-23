@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router/router.jsx";
 import "./styles/main.scss";
