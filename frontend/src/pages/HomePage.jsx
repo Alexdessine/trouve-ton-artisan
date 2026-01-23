@@ -55,39 +55,12 @@ export default function HomePage() {
                 <div className="separation"></div>
                 <h2 className="findArtisan">Comment trouver mon artisan ?</h2>
                 <ol>
-                    <li>Choisir la catégorie d’artisanat dans le menu</li>
-                    <li>Choisir un artisan</li>
-                    <li>Le contacter via le formulaire de contact</li>
-                    <li>Une réponse sera apportée sous 48h.</li>
+                    <li><span>1</span>Choisir la catégorie d’artisanat dans le menu</li>
+                    <li><span>2</span>Choisir un artisan</li>
+                    <li><span>3</span>Le contacter via le formulaire de contact</li>
+                    <li><span>4</span>Une réponse sera apportée sous 48h.</li>
                 </ol>
             </section>
-            <section className="Top">
-                
-            </section>
-
-            {/* <HowToFind title="Comment trouver un artisan ?" steps={howSteps} /> */}
-
-            {/* Si tu veux afficher aussi les catégories sur la home */}
-            {/* <section className="container py-4">
-                <div className="title-accent mb-2" />
-                <h2 className="section-title mb-3">Catégories</h2>
-
-                {loading && <div className="text-body-secondary">Chargement…</div>}
-                {!loading && error && <div className="alert alert-warning mb-0">{error}</div>}
-
-                {!loading && !error && (
-                    <div className="d-flex gap-2 flex-wrap">
-                        {categories.map((c) => (
-                            <span key={c.id_categorie} className="badge text-bg-light border">
-                                {c.label}
-                            </span>
-                        ))}
-                    </div>
-                )}
-            </section> */}
-
-            
-
             {!loading && !error && artisans.length > 0 && (
                 <ArtisansCarousel title="Top 3 des artisans" artisans={artisans} />
             )}

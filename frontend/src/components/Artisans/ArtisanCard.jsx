@@ -4,7 +4,7 @@ export default function ArtisanCard({ artisan }) {
     const name = artisan.nom;
     const city = artisan.ville;
     const specialityLabel = artisan.Specialite?.label ?? "—";
-    const favori = artisan.is_favori ? "Au top" : "";
+    // const favori = artisan.is_favori ? "Au top" : "";
 
     return (
         <article className="tta-card p-3">
@@ -15,9 +15,8 @@ export default function ArtisanCard({ artisan }) {
             </div>
 
             <div className="text-center">
-                <div className="fw-semibold">{specialityLabel}</div>
-                <div className="text-body-secondary">{city}</div>
-                <div className="text-body-secondary">{favori}</div>
+                <div className="">{specialityLabel}</div>
+                <div>{city}</div>
             </div>
         </article>
     );

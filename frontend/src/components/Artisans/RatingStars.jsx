@@ -7,9 +7,9 @@ export default function RatingStars({ value }) {
 
     return (
         <div className="tta-stars" aria-label={safe !== null ? `Note ${safe}/5` : "Note indisponible"}>
+            {safe !== null && <span className="">{safe.toFixed(1)}</span>}
             {"★".repeat(full)}
             {"☆".repeat(empty)}
-            {safe !== null && <span className="ms-2 text-body-secondary">{safe.toFixed(1)}</span>}
         </div>
     );
 }
