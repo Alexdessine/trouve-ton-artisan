@@ -15,7 +15,7 @@ export default function ArtisanCard({ artisan }) {
             </div>
 
             <div className="text-center">
-                <div className="">{specialityLabel}</div>
+                <div>{specialityLabel}</div>
                 <div>{city}</div>
             </div>
         </article>
