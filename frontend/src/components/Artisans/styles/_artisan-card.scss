@@ -1,0 +1,21 @@
+.tta-card {
+    background: var(--color-secondary);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(56, 64, 80, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.carousel-item .tta-card {
+    max-width: 320px;
+    width: 100%;
+}
+
+.tta-card__name {
+    color: var(--color-tertiary);
+    font-weight: 600;
+}
+
+.tta-stars {
+    color: var(--color-principal);
+    letter-spacing: 2px;
+}

@@ -1,0 +1,22 @@
+:root {
+    /* Colors */
+    --color-font: #384050;
+    --color-principal: #0074C7;
+    --color-secondary: #F1F8FC;
+    --color-tertiary: #00497C;
+    --color-valid: #82B864;
+    --color-danger: #CD2C2E;
+
+    /* Text Styles (fix pxpx) */
+    --font-family-titre-h1: "Graphik Trial", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-size-titre-h1: 24px;
+    --font-weight-titre-h1: 600;
+
+    --font-family-titre-h2: "Graphik Trial", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-size-titre-h2: 20px;
+    --font-weight-titre-h2: 500;
+
+    --font-family-paragraph: "Graphik Trial", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-size-paragraph: 16px;
+    --font-weight-paragraph: 400;
+}

@@ -1,0 +1,12 @@
+@import "./fonts";
+@import "./tokens";
+
+/* Bootstrap (pas de surcharge inutile) */
+@import "bootstrap/scss/bootstrap.scss";
+
+/* Globals + composants */
+@import "./globals";
+@import "../components/Header/header";
+@import "../components/Footer/footer";
+@import "./home";
+@import "../components/Artisans/styles/artisan-card";
