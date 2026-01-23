@@ -1,4 +1,4 @@
 import React from "react";
 export default function LegalPage() {
-    return <h1>Mentions légales</h1>;
+    return <p>Page en cours de construction</p>;
 }
