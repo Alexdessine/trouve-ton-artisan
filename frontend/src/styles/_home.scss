@@ -1,3 +1,45 @@
+
+
+h1.page-title{
+    font-size: 24px;
+    color: var(--color-tertiary);
+    margin-top: 0;
+    font-weight: 500;
+    margin-bottom: 17px;
+}
+
+.list{
+    margin: 0;
+    width: 100%;
+    padding-left: 33px;
+    padding-bottom: 10px;
+}
+
+.separation{
+    width: 30px;
+    height: 6px;
+    background-color: var(--color-principal);
+    margin-bottom: 8px;
+}
+
+.findArtisan, .topArtisan{
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: var(--color-principal);
+}
+
+.Top {
+    margin: 0;
+    width: 100%;
+    padding-left: 33px;
+    padding-bottom: 10px;
+}
+
+.Top .separation{
+    background-color: var(--color-valid);
+}
+
 /* Carousel "tuiles qui défilent" */
 
 .tta-carousel {

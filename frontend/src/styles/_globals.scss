@@ -1,13 +1,13 @@
 html,
 body {
     height: 100%;
+    font-family: "Graphik Trial", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
     font-family: var(--font-family-paragraph);
     font-size: var(--font-size-paragraph);
     font-weight: var(--font-weight-paragraph);
-    color: var(--color-font);
     background: #fff;
 }
 

@@ -49,11 +49,23 @@ export default function HomePage() {
 
     return (
         <main>
-            <section className="container py-4">
-                <h1 className="page-title mb-2">Trouver mon artisan</h1>
+            <section className="list">
+                <h1 className="page-title">Trouver mon artisan</h1>
+                <div className="separation"></div>
+                <h2 className="findArtisan">Comment trouver mon artisan ?</h2>
+                <ol>
+                    <li>Choisir la catégorie d’artisanat dans le menu</li>
+                    <li>Choisir un artisan</li>
+                    <li>Le contacter via le formulaire de contact</li>
+                    <li>Une réponse sera apportée sous 48h.</li>
+                </ol>
+            </section>
+            <section className="Top">
+                <div className="separation"></div>
+                <h2 className="topArtisan">Top 3 des artisans</h2>
             </section>
 
-            <HowToFind title="Comment trouver un artisan ?" steps={howSteps} />
+            {/* <HowToFind title="Comment trouver un artisan ?" steps={howSteps} /> */}
 
             {/* Si tu veux afficher aussi les catégories sur la home */}
             {/* <section className="container py-4">
@@ -77,7 +89,6 @@ export default function HomePage() {
             {!loading && !error && top3.length > 0 && <TopArtisansCarousel artisans={top3} />}
             {!loading && !error && top3.length === 0 && (
                 <section className="container pb-4 text-body-secondary">
-                    <div className="title-accent mb-2" />
                     <h2 className="section-title mb-3">Top 3 des artisans</h2>
                     Aucun artisan favori disponible.
                 </section>
