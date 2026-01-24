@@ -3,7 +3,7 @@ import HowToFind from "../components/Home/HowToFind";
 import TopArtisansCarousel from "../components/Home/TopArtisans";
 import { fetchCategories } from "../services/categoriesApi";
 import { fetchArtisans } from "../services/artisansApi";
-import ArtisansCarousel from "../components/home/ArtisansCarousel";
+import ArtisansCarousel from "../components/Home/ArtisansCarousel";
 
 export default function HomePage() {
     const [categories, setCategories] = useState([]);
