@@ -1,6 +1,8 @@
 .result{
     color: var(--color-principal);
     font-size: 20px;
+    padding-left: 33px;
+    margin-bottom: 40px;
 }
 
 .separationRed {
@@ -8,4 +10,22 @@
     height: 6px;
     background-color: var(--color-danger);
     margin-bottom: 8px;
+    margin-left: 33px;
+}
+
+.artisan{
+    margin-left: 33px;
+
+}
+
+/* Tablet */
+@media (min-width: 768px) {}
+
+/* Desktop */
+@media (min-width: 992px) {
+    .artisan, .separationRed, .result{
+        margin-left: 111px;
+        padding-left: 0;
+    }
+
 }

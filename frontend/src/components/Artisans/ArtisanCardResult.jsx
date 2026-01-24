@@ -5,7 +5,6 @@ export default function ArtisanCardResult({ artisan }) {
     const name = artisan.nom;
     const city = artisan.ville;
     const specialityLabel = artisan.Specialite?.label ?? "—";
-    // const favori = artisan.is_favori ? "Au top" : "";
 
     return (
         <article className="tta-card-result p-3">

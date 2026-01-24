@@ -54,7 +54,7 @@ export default function ArtisansListPage() {
 
     return (
         <section className="container py-3">
-            <h1 className="page-title">Rechercher mon artisan</h1>
+            <h1 className="page-title artisan">Rechercher mon artisan</h1>
             <div className="separationRed"></div>
             <h2 className="result">{filtered.length} résultats trouvés</h2>
 
