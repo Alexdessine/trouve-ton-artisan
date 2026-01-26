@@ -146,7 +146,7 @@ export default function ArtisanDetailPage() {
                     </div>
                     <div className="a_propos_mobile d-lg-none">
                         <div className="separationBlue mt-4 mt-md-0 mx-0"></div>
-                        <h3 className="title_h3 mt-lg-2">À propos de cet artisan</h3>
+                        <h3 className="title_h3">À propos de cet artisan</h3>
                         <p className="px-3 mb-0">{about}</p>
                     </div>
                 </div>
