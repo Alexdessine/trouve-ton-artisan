@@ -171,6 +171,30 @@ Cette approche améliore la cohérence visuelle et la maintenabilité du code.
 
 ---
 
+### ✉️ Formulaire de contact
+
+Le formulaire de contact est sécurisé pour garantir la sécurité des données. il permet de à un utilisateur d'envoyer un message à un artisan depuis sa fiche, sans exposer directement d'adresse mail.
+
+#### 🔁 Flux de fonctionnement
+
+** Formulaire (React) -> API REST -> SMTP -> réception mail**
+ * validation côté client (UX),
+ * validation côté serveur (sécurité),
+ * envoi du message par email via SMTP.
+ 
+#### 🔐 Sécurité et anti-spam
+
+ * validation des champs côté serveur, 
+ * honeypot anti-spam,
+ * rate limiting spécifique,
+ * envoi centralisé via l'API.
+
+#### 🛡️ Conformité RGPD
+ 
+ * aucune donnée saisie n'est stockée,
+ * aucune persistance en base de données,
+ * les informations sont utilisées uniquement pour l'envoi du message.
+
 ## 📄 Pages développées
 
 ### 🏠 Page d’accueil
