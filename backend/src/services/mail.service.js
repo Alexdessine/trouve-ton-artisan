@@ -67,7 +67,58 @@ ${message}
   }
 }
 
+async function sendContactEmail({ sender, message, artisan }) {
+  const from = process.env.MAIL_FROM;
+  const to = process.env.CONTACT_RECEIVER_EMAIL || process.env.MAIL_TO;
+
+  if (!from) {
+    const err = new Error("MAIL_FROM non configuré.");
+    err.statusCode = 500;
+    throw err;
+  }
+
+  if (!to) {
+    const err = new Error("CONTACT_RECEIVER_EMAIL (ou MAIL_TO) non configuré.");
+    err.statusCode = 500;
+    throw err;
+  }
+
+  const transporter = buildTransporter();
+
+  const subject = artisan
+    ? `[Trouve ton artisan] Message pour artisan ${artisan.nom}`
+    : `[Trouve ton artisan] Nouveau message de contact`;
+
+  const text =
+    `Message envoyé via Trouve ton artisan
+
+De : ${sender.nom} <${sender.email}>
+
+${artisan ? `Artisan : ${artisan.nom}\n` : ""}
+
+Message :
+${message}
+`;
+
+  try {
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: sender.email,
+      subject,
+      text,
+    });
+  } catch (e) {
+    const err = new Error("Erreur lors de l'envoi SMTP.");
+    err.statusCode = 502;
+    err.details = e?.message;
+    throw err;
+  }
+}
+
+
 module.exports = {
   // si tu avais déjà sendContactEmail, garde-le
   sendMessageToArtisan,
+  sendContactEmail
 };
