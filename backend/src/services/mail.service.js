@@ -109,6 +109,13 @@ ${message}
       text,
     });
   } catch (e) {
+    console.error("[SMTP ERROR]", {
+      message: e?.message,
+      code: e?.code,
+      response: e?.response,
+      responseCode: e?.responseCode,
+      command: e?.command,
+    });
     const err = new Error("Erreur lors de l'envoi SMTP.");
     err.statusCode = 502;
     err.details = e?.message;
