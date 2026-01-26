@@ -32,7 +32,7 @@ function validate(values) {
     return errors;
 }
 
-export default function ContactForm() {
+export default function ContactForm({ artisanId }) {
     const [values, setValues] = useState({
         nom: "",
         email: "",
@@ -83,7 +83,7 @@ export default function ContactForm() {
         setSubmitting(true);
 
         try {
-            const res = await fetch(`${API_BASE_URL}/api/contact`, {
+            const res = await fetch(`${API_BASE_URL}/api/artisans/${artisanId}/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
