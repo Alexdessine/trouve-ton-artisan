@@ -12,6 +12,7 @@ function isValidId(id) {
 
 export default function ArtisanDetailPage() {
     const { id } = useParams();
+    const artisanId = Number(id);
     const [artisan, setArtisan] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -152,7 +153,7 @@ export default function ArtisanDetailPage() {
                 </div>
                 {/* Colonne droite */}
                 <div className="col-12 col-md-12 col-lg-6">
-                    <ContactForm artisanId={id} artisanName={name} />
+                    <ContactForm artisanId={artisanId} artisanName={name} />
                 </div>
             </div>
         </section>

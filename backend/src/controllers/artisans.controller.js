@@ -1,4 +1,5 @@
 const artisansService = require('../services/artisans.service');
+const { Artisan } = require("../models");
 const mailService = require("../services/mail.service");
 
 async function getAll(req, res, next) {
@@ -42,30 +43,31 @@ async function getFavori(req, res, next) {
     }
 }
 
-const postContactArtisan = async (req, res, next) => {
+async function postContactArtisan(req, res, next) {
     try {
         const artisanId = Number(req.params.id);
+        const { nom, email, message, website } = req.body;
 
-        const artisan = await artisansService.getArtisanById(artisanId);
-
-        if (!artisan) {
-            return res.status(404).json({
-                error: "Not Found",
-                message: "Artisan introuvable.",
-            });
+        // honeypot : ton validator s’en charge déjà, mais si tu veux double sécurité :
+        if (typeof website === "string" && website.trim() !== "") {
+            return res.status(400).json({ message: "Requête rejetée (spam détecté)." });
         }
 
-        const { nom, email, message } = req.body;
+        const artisan = await Artisan.findByPk(artisanId);
+        if (!artisan) {
+            return res.status(404).json({ message: "Artisan introuvable." });
+        }
 
-        await mailService.sendMessageToArtisan({
-            artisan,
+        const to = process.env.CONTACT_RECEIVER_EMAIL; // ex: contact@tonsite.fr (OBLIGATOIRE en prod)
+
+        // Email plateforme (fiable)
+        await mailService.sendContactEmail({
             sender: { nom, email },
             message,
+            artisan: {id: artisan.id, nom: artisan.nom},
         });
 
-        return res.status(200).json({
-            message: "Message envoyé à l'artisan.",
-        });
+        return res.status(200).json({ message: "Message envoyé." });
     } catch (err) {
         return next(err);
     }
