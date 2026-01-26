@@ -1,0 +1,89 @@
+.separationBlue {
+    width: 30px;
+    height: 6px;
+    background-color: var(--color-principal);
+    margin-bottom: 8px;
+    margin-left: 33px;
+}
+
+.separationGreen {
+    width: 30px;
+    height: 6px;
+    background-color: var(--color-valid);
+    margin-bottom: 8px;
+    margin-left: 33px;
+}
+
+.profilDetail {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.artisanInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary);
+}
+
+.a_propos_mobile .title_h3, .contactForm .title_h3{
+    color: var(--color-principal);
+}
+
+.artisanInfo .locationArtisan {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.locationArtisan a{
+    text-decoration: none;
+    color: var(--color-font);
+}
+
+
+/* Tablet */
+@media (min-width: 768px) {
+    .artisanInfoColumn {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap:20px;
+    }
+
+    .artisanInfo {
+        width: 50%;
+    }
+
+    .a_propos_mobile{
+        width: 50%;
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+    .artisanInfoColumn{
+        max-width: 50%;
+    }
+
+    .artisanInfo{
+        width: 100%;
+
+    }
+
+    .a_propos{
+        padding-top: 20px;
+    }
+    .contactForm{
+        width: 100%;
+    }
+}
+
