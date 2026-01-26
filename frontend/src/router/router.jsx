@@ -9,6 +9,7 @@ import ArtisanDetailPage from "../pages/ArtisanDetailPage.jsx";
 import LegalPage from "../pages/legal/MentionsLegales.jsx";
 import AccessPage from "../pages/legal/Accessiblite.jsx";
 import ConfPage from "../pages/legal/Confidentialite.jsx";
+import Cookie from "../pages/legal/Cookie.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 
 export const router = createBrowserRouter([
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
             { path: "legal", element: <LegalPage /> },
             { path: "accessibility", element: <AccessPage /> },
             { path: "confidentiality", element: <ConfPage /> },
+            { path: "cookie", element: <Cookie /> },
 
             // Page 404 avec layout
             { path: "*", element: <NotFoundPage /> },

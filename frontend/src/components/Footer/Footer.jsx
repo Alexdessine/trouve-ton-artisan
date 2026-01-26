@@ -29,11 +29,11 @@ export default function Footer() {
                             <div className="links">
                                 <div className="linksTop">
                                     <Link to="/legal">Mentions légales</Link>
-                                    <Link to="/legal">Données personnelles</Link>
+                                    <Link to="/confidentiality">Données personnelles</Link>
                                 </div>
                                 <div className="linksBottom">
                                     <Link to="/accessibility">Accessibilité</Link>
-                                    <Link to="/confidentiality">Cookies</Link>
+                                    <Link to="/cookie">Cookies</Link>
                                 </div>
                             </div>
                         </div>
