@@ -6,7 +6,9 @@ import HomePage from "../pages/HomePage.jsx";
 // import ArtisansPage from "../pages/ArtisansPage.jsx";
 import ArtisansListPage from "../pages/ArtisansListPage.jsx";
 import ArtisanDetailPage from "../pages/ArtisanDetailPage.jsx";
-import LegalPage from "../pages/LegalPage.jsx";
+import LegalPage from "../pages/legal/MentionsLegales.jsx";
+import AccessPage from "../pages/legal/Accessiblite.jsx";
+import ConfPage from "../pages/legal/Confidentialite.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 
 export const router = createBrowserRouter([
@@ -18,6 +20,8 @@ export const router = createBrowserRouter([
             { path: "artisans", element: <ArtisansListPage /> },
             { path: "artisans/:id", element: <ArtisanDetailPage /> },
             { path: "legal", element: <LegalPage /> },
+            { path: "accessibility", element: <AccessPage /> },
+            { path: "confidentiality", element: <ConfPage /> },
 
             // Page 404 avec layout
             { path: "*", element: <NotFoundPage /> },

@@ -32,8 +32,8 @@ export default function Footer() {
                                     <Link to="/legal">Données personnelles</Link>
                                 </div>
                                 <div className="linksBottom">
-                                    <Link to="/legal">Accessibilité</Link>
-                                    <Link to="/legal">Cookies</Link>
+                                    <Link to="/accessibility">Accessibilité</Link>
+                                    <Link to="/confidentiality">Cookies</Link>
                                 </div>
                             </div>
                         </div>
