@@ -16,7 +16,7 @@ export default function Footer() {
                                 srcSet={`${logoFooter330} 330w, ${logoFooter660} 660w, ${logoFooter990} 990w`} 
                                 sizes="(max-width: 480px) 160px, 329px" 
                                 alt="Logo Trouve ton artisan" 
-                                className="logo_header" />
+                                className="logo_footer" />
                         </Link>
                     </div>
                     <div className="footerSocials">

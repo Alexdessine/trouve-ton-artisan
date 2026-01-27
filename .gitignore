@@ -4,3 +4,4 @@ backend/node_modules
 .env.gmail
 .env.local
 .env.prod
+/frontend/.env.*
