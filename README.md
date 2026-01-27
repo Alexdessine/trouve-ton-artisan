@@ -309,11 +309,11 @@ L'application **Trouve ton artisan** est déployée en conditions réelles sur u
 ### 🌍 URLs de production
 
 * **Frontend** : [https://trouve-ton-artisan.alexandrebourlier.fr](https://trouve-ton-artisan.alexandrebourlier.fr)
-* **API REST** : [https://api.trouve-ton-artisan.alexandrebourlier.fr](https://api.trouve-ton-artisan.alexandrebourlier.fr)
+* **API REST** : [https://api.trouve-ton-artisan.alexandrebourlier.fr](https://api.trouve-ton-artisan.alexandrebourlier.fr/api)
 
 ### 🏗️ Architecture de déploiement
 
-```bash 
+```bash
 Navigateur
    │
    │ HTTPS
@@ -330,12 +330,12 @@ Base de données MySQL (MariaDB)
 ```
 
 **Choix techniques**
- * **Frontend** servi comme site statique (build Vite)
- * **Backend Node.js** exécuté via **Phusion Passenger**
- * **Base de données MySQL** hébergée sur le même serveur
- * **HTTPS** activé sur les deux sous-domaines
- * Aucun port exposé manuellement (gestion autormatique par Passenger)
 
+* **Frontend** servi comme site statique (build Vite)
+* **Backend Node.js** exécuté via **Phusion Passenger**
+* **Base de données MySQL** hébergée sur le même serveur
+* **HTTPS** activé sur les deux sous-domaines
+* Aucun port exposé manuellement (gestion autormatique par Passenger)
 
 ### ⚙️ Variables d’environnement
 
@@ -345,9 +345,10 @@ Les variables frontend sont injectées **au moment du build**
 
 📁 `frontend/.env.production`
 
-```bash 
+```bash
 VITE_API_URL=https://api.trouve-ton-artisan.alexandrebourlier.fr
 ```
+
 ⚠️ Avec Vite, toute modification de variable nécessite un nouveau build.
 
 ---
@@ -357,7 +358,8 @@ VITE_API_URL=https://api.trouve-ton-artisan.alexandrebourlier.fr
 Les variables backend sont définies via **cPanel** -> **Setup Node.js App** -> **Environnement Variables**
 
 **Variables utilisées (noms uniquement)**
-```bash 
+
+```bash
 NODE_ENV
 DB_HOST
 DB_PORT
@@ -377,6 +379,7 @@ CONTACT_RECEIVER_EMAIL
 FRONTEND_URL
 FRONTEND_URL_WWW
 ```
+
 📌 **Aucune donnée sensible n’est versionnée.**
 📌 Les variables sont injectées au runtime par Passenger.
 
@@ -387,7 +390,8 @@ FRONTEND_URL_WWW
 L'API applique une politique **CORS restrictive**, basée sur une **liste blanche d'origines**
 
 **Origines autorisées**
- * [https://trouve-ton-artisan.alexandrebourlier.fr](https://trouve-ton-artisan.alexandrebourlier.fr)
+
+* [https://trouve-ton-artisan.alexandrebourlier.fr](https://trouve-ton-artisan.alexandrebourlier.fr)
 
 Le conrôle est effectué via un middleware dédié, configuré à partir des variables d'environnement :
 
@@ -410,32 +414,35 @@ Toute requête provenant d'une origine non autorisée est automatiquement rejet�
 npm install
 npm run build
 ```
+
 * upload du dossier `dist`sur le sous-domaine frontend
 
 #### 2️⃣ Backend
- * Upload du code API
- * Installation des dépendances avec Node LTS
- * Configuration des variables d'environnement via cPanel
- * Redémarrage de l'application Node (Passenger)
+
+* Upload du code API
+* Installation des dépendances avec Node LTS
+* Configuration des variables d'environnement via cPanel
+* Redémarrage de l'application Node (Passenger)
 
 #### 3️⃣ Base de données
- * Création via cPanel
- * Import des scripts SQL (`01_schema.sql`, `02_seed.sql`)
- * Connexion vérifiée via Sequelize
- 
+
+* Création via cPanel
+* Import des scripts SQL (`01_schema.sql`, `02_seed.sql`)
+* Connexion vérifiée via Sequelize
+
 ---
 
 ### 🧪 Tests de validation en production
 
-Les tests suivants ont été effectués après déploiement : 
+Les tests suivants ont été effectués après déploiement :
 
- * Accès frontend (navigation complète)
- * Appels API depuis le frontend (CORS)
- * Endpoints publics (`/categories`, `/artisans`, `/artisans/:id`)
- * Envoi de message via formulaire de contact
- * Réception effective de l'email (SMTP réel)
- * Vérification HTTPS
- * Absence d'erreurs console
+* Accès frontend (navigation complète)
+* Appels API depuis le frontend (CORS)
+* Endpoints publics (`/categories`, `/artisans`, `/artisans/:id`)
+* Envoi de message via formulaire de contact
+* Réception effective de l'email (SMTP réel)
+* Vérification HTTPS
+* Absence d'erreurs console
 
 Tous les tests sont **validés**
 
