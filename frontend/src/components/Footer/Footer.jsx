@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoFooter from "../../assets/img/logo_footer.png";
+import logoFooter330 from "../../assets/img/logo_footer-330.webp";
+import logoFooter660 from "../../assets/img/logo_footer-660.webp";
+import logoFooter990 from "../../assets/img/logo_footer-990.webp";
 
 export default function Footer() {
     return (
@@ -9,7 +11,12 @@ export default function Footer() {
                 <div className="footerItem">
                     <div className="footerLogo">
                         <Link to="/" aria-label="Aller à l’accueil">
-                            <img src={logoFooter} alt="Logo Trouve ton artisan" className="logo_footer" />
+                            <img 
+                                src={logoFooter330}
+                                srcSet={`${logoFooter330} 330w, ${logoFooter660} 660w, ${logoFooter990} 990w`} 
+                                sizes="(max-width: 480px) 160px, 329px" 
+                                alt="Logo Trouve ton artisan" 
+                                className="logo_header" />
                         </Link>
                     </div>
                     <div className="footerSocials">

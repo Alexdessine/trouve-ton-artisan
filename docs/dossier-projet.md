@@ -4,7 +4,7 @@ Ce fichier constitue la base du **dossier PDF final** destiné à l’évaluateu
 
 ## 🚀 Statut du projet
 
-🟢 **Phase 4 – Frontend fonctionnellement terminée**  
+🟢 **Phase 5 - Fonctionnalités et qualité finalisées**  
 Le projet a été développé par phases successives, conformément au cahier des charges pédagogique.  
 L’ensemble des fonctionnalités prévues est opérationnel.  
 Le travail actuel concerne la **finalisation du livrable** et la **préparation de la soutenance**.
@@ -170,6 +170,30 @@ L’interface repose sur des composants réutilisables :
 Cette approche améliore la cohérence visuelle et la maintenabilité du code.
 
 ---
+
+### ✉️ Formulaire de contact
+
+Le formulaire de contact est sécurisé pour garantir la sécurité des données. il permet de à un utilisateur d'envoyer un message à un artisan depuis sa fiche, sans exposer directement d'adresse mail.
+
+#### 🔁 Flux de fonctionnement
+
+** Formulaire (React) -> API REST -> SMTP -> réception mail**
+ * validation côté client (UX),
+ * validation côté serveur (sécurité),
+ * envoi du message par email via SMTP.
+ 
+#### 🔐 Sécurité et anti-spam
+
+ * validation des champs côté serveur, 
+ * honeypot anti-spam,
+ * rate limiting spécifique,
+ * envoi centralisé via l'API.
+
+#### 🛡️ Conformité RGPD
+ 
+ * aucune donnée saisie n'est stockée,
+ * aucune persistance en base de données,
+ * les informations sont utilisées uniquement pour l'envoi du message.
 
 ## 📄 Pages développées
 

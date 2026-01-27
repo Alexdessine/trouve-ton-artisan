@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
-import HowToFind from "../components/Home/HowToFind";
-import TopArtisansCarousel from "../components/Home/TopArtisans";
+import React, { Suspense, useEffect, useMemo, useState, lazy } from "react";
 import { fetchCategories } from "../services/categoriesApi";
 import { fetchArtisans } from "../services/artisansApi";
-import ArtisansCarousel from "../components/Home/ArtisansCarousel";
+
+// Lazy-load du composant (code splitting)
+const ArtisansCarousel = lazy(() => import("../components/Home/ArtisansCarousel"));
 
 export default function HomePage() {
     const [categories, setCategories] = useState([]);
@@ -33,20 +33,15 @@ export default function HomePage() {
         }
 
         load();
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     const top3 = useMemo(
         () => artisans.filter((a) => a.is_favori === 1).slice(0, 3),
         [artisans]
     );
-
-    const howSteps = [
-        { heading: "1.", text: "Choisir la catégorie d’artisanat dans le menu" },
-        { heading: "2.", text: "Choisir un artisan" },
-        { heading: "3.", text: "Le contacter via le formulaire de contact" },
-        { heading: "4.", text: "Une réponse sera apportée sous 48h." },
-    ];
 
     return (
         <main>
@@ -61,8 +56,17 @@ export default function HomePage() {
                     <li><span>4</span>Une réponse sera apportée sous 48h.</li>
                 </ol>
             </section>
+
             {!loading && !error && artisans.length > 0 && (
-                <ArtisansCarousel title="Top 3 des artisans" artisans={artisans} />
+                <Suspense
+                    fallback={
+                        <section className="container pb-4 text-body-secondary">
+                            Chargement des contenus…
+                        </section>
+                    }
+                >
+                    <ArtisansCarousel title="Top 3 des artisans" artisans={artisans} />
+                </Suspense>
             )}
 
             {!loading && !error && artisans.length === 0 && (
@@ -71,6 +75,11 @@ export default function HomePage() {
                 </section>
             )}
 
+            {error && (
+                <section className="container pb-4 text-danger">
+                    {error}
+                </section>
+            )}
         </main>
     );
 }

@@ -1,0 +1,5 @@
+User-agent: *
+# Disallow: /
+
+# Sitemap (si disponible)
+Sitemap: https://localhost:4173/sitemap.xml

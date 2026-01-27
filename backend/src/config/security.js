@@ -2,6 +2,7 @@
 const allowedOrigins = [
     process.env.FRONTEND_URL,
     process.env.FRONTEND_URL_WWW,
+    process.env.FRONTEND_URL_PREVIEW,
 ].filter(Boolean);
 
 function corsOptionsDelegate(req, callback) {
