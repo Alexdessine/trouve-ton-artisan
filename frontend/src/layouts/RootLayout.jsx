@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 
+// Layout racine de l'application
 export default function RootLayout() {
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>

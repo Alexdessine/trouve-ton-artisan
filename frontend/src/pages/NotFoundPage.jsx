@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useRouteError } from "react-router-dom";
 import NotFound from "../../src/assets/img/404.svg";
 
+// Composant page 404 - Page non trouvée
 export default function NotFoundPage() {
     useRouteError(); // optionnel
     return (

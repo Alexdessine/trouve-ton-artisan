@@ -1,24 +1,28 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
+// Vérification de la présence de l'URL de base de l'API
 if (!API_BASE_URL) {
     throw new Error('VITE_API_URL manquant dans les variables d\'environnement');
 }
 
+// Fonction utilitaire pour effectuer une requête GET à l'API
 async function apiGet(path, errorMessage) {
     const res = await fetch(`${API_BASE_URL}${path}`);
     if (!res.ok) throw new Error(`${errorMessage} (HTTP ${res.status})`);
     return res.json();
 }
 
+// Fonction pour récupérer les catégories depuis l'API
 export async function fetchCategories() {
     return apiGet('/api/categories', 'Erreur chargement categories');
 }
 
+// Fonction pour récupérer les artisans depuis l'API
 export async function fetchArtisans() {
     return apiGet('/api/artisans', 'Erreur chargement artisans');
 }
 
-
+// Fonction pour envoyer un message de contact via l'API
 export async function sendContactMessage(payload) {
     const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",

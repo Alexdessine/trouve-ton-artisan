@@ -4,12 +4,15 @@ import ContactForm from "../components/Contact/ContactForm";
 import profil from "../assets/img/user.svg";
 import RatingStars from "../components/Artisans/RatingStars";
 
+// URL de l'API depuis les variables d'environnement
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
+// Validation de l'ID (doit être un entier positif)
 function isValidId(id) {
     return /^[0-9]+$/.test(id);
 }
 
+// Composant page de détail d'un artisan
 export default function ArtisanDetailPage() {
     const { id } = useParams();
     const artisanId = Number(id);
@@ -18,25 +21,32 @@ export default function ArtisanDetailPage() {
     const [error, setError] = useState(null);
     const [notFound, setNotFound] = useState(false);
 
+    // Effet pour charger les données de l'artisan
     useEffect(() => {
         let isMounted = true;
 
+        // Fonction asynchrone pour récupérer les données de l'artisan
         async function fetchArtisan() {
             setLoading(true);
             setError(null);
             setNotFound(false);
 
+            // Validation de l'ID
             if (!id || !isValidId(id)) {
                 setLoading(false);
                 setNotFound(true);
                 return;
             }
 
+            // Requête à l'API pour récupérer les données de l'artisan
             try {
+                // Appel API
                 const res = await fetch(`${API_BASE_URL}/api/artisans/${id}`);
 
+                // Vérification de la réponse
                 const contentType = res.headers.get("content-type") || "";
 
+                // Gestion des erreurs HTTP
                 if (!res.ok) {
                     // on évite res.json() si c’est du HTML
                     const raw = await res.text();
@@ -49,6 +59,7 @@ export default function ArtisanDetailPage() {
                     throw new Error(`Erreur API (${res.status}) - ${raw.slice(0, 120)}`);
                 }
 
+                // Vérification du type de contenu
                 if (!contentType.includes("application/json")) {
                     const raw = await res.text();
                     throw new Error(`Réponse non JSON reçue: ${raw.slice(0, 120)}`);
@@ -58,12 +69,14 @@ export default function ArtisanDetailPage() {
                 setArtisan(data);
                 setLoading(false);
             } catch (e) {
+                // Gestion des erreurs
                 if (!isMounted) return;
                 setError(e instanceof Error ? e.message : "Erreur inconnue");
                 setLoading(false);
             }
         }
 
+        // Appel de la fonction de récupération des données
         fetchArtisan();
 
         return () => {
@@ -71,6 +84,7 @@ export default function ArtisanDetailPage() {
         };
     }, [id]);
 
+    // Affichage des différents états (chargement, erreur, non trouvé)
     if (loading) {
         return (
             <div className="container py-4">
@@ -83,6 +97,7 @@ export default function ArtisanDetailPage() {
         );
     }
 
+    // Affichage des différents états (chargement, erreur, non trouvé)
     if (notFound) {
         return (
             <div className="container py-4">
@@ -95,6 +110,7 @@ export default function ArtisanDetailPage() {
         );
     }
 
+    // Erreur de chargement
     if (error) {
         return (
             <div className="container py-4">

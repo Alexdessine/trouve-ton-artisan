@@ -1,3 +1,4 @@
+// Composant barre de recherche réutilisable
 export default function SearchBar({ value, onChange, placeholder = "Rechercher un artisan..." }) {
     return (
         <div className="mb-3">

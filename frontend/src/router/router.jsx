@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "../layouts/RootLayout.jsx";
 import HomePage from "../pages/HomePage.jsx";
-// import ArtisansPage from "../pages/ArtisansPage.jsx";
 import ArtisansListPage from "../pages/ArtisansListPage.jsx";
 import ArtisanDetailPage from "../pages/ArtisanDetailPage.jsx";
 import LegalPage from "../pages/legal/MentionsLegales.jsx";
