@@ -12,7 +12,7 @@ export default function ArtisanCardResult({ artisan }) {
         <Link to ={`/artisans/${id}`} className="text-decoration-none" aria-label={`Voir la fiche de ${artisan?.nom ?? "cet artisan"}`}>
         <article className="tta-card-result p-3">
             <div className="profil">
-                <img src={profil} alt="Profil" className="me-2" />
+                <img src={profil} alt="Profil" className="me-2" width="120px" height="120px"/>
 
                 <div className="mb-2">
                     <RatingStars value={artisan.note} />

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/img/logo.png";
+import logo330 from "../../assets/img/logo-330.webp";
+import logo660 from "../../assets/img/logo-660.webp";
+import logo990 from "../../assets/img/logo-990.webp";
 import { fetchCategories } from "../../services/api";
 
 export default function Header() {
@@ -96,7 +98,12 @@ export default function Header() {
             <nav className={`navbar ${isSearchOpen || isMenuOpen ? "active" : ""}`}>
                 <div className="navTop">
                     <Link to="/" aria-label="Aller à l’accueil">
-                        <img src={logo} alt="Logo Trouve ton artisan" className="logo_header" />
+                        <img 
+                        src={logo330}
+                        srcSet={`${logo330} 330w, ${logo660} 660w, ${logo990} 990w`} 
+                        sizes="(max-width: 480px) 160px, 329px" 
+                        alt="Logo Trouve ton artisan" 
+                        className="logo_header" />
                     </Link>
 
                     <div className="navActions">
