@@ -4,7 +4,7 @@ Ce fichier constitue la base du **dossier PDF final** destiné à l’évaluateu
 
 ## 🚀 Statut du projet
 
-🟢 **Phase 4 – Frontend fonctionnellement terminée**  
+🟢 **Phase 5 - Fonctionnalités et qualité finalisées**  
 Le projet a été développé par phases successives, conformément au cahier des charges pédagogique.  
 L’ensemble des fonctionnalités prévues est opérationnel.  
 Le travail actuel concerne la **finalisation du livrable** et la **préparation de la soutenance**.
