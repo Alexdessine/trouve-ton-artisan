@@ -1,12 +1,17 @@
 // src/components/contact/ContactForm.jsx
+
+// React et hooks
 import { useMemo, useState } from "react";
 
+// URL de l'API depuis les variables d'environnement
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? "";
 
+// Validation des champs du formulaire
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+// Fonction de validation des valeurs du formulaire
 function validate(values) {
     const errors = {};
     const nom = values.nom.trim();
@@ -14,6 +19,7 @@ function validate(values) {
     const message = values.message.trim();
     const website = values.website.trim();
 
+    // Validation des champs
     if (!nom) errors.nom = "Le nom est requis.";
     else if (nom.length < 2) errors.nom = "Le nom doit contenir au moins 2 caractères.";
     else if (nom.length > 80) errors.nom = "Le nom ne doit pas dépasser 80 caractères.";
@@ -32,6 +38,7 @@ function validate(values) {
     return errors;
 }
 
+// Composant fonctionnel ContactForm qui prend en prop l'ID de l'artisan
 export default function ContactForm({ artisanId }) {
     const [values, setValues] = useState({
         nom: "",
@@ -40,6 +47,7 @@ export default function ContactForm({ artisanId }) {
         website: "", // honeypot
     });
 
+    // états pour le formulaire
     const [touched, setTouched] = useState({});
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -47,19 +55,23 @@ export default function ContactForm({ artisanId }) {
     // message global (pas sensible)
     const [submitError, setSubmitError] = useState("");
 
+    // Validation des erreurs
     const errors = useMemo(() => validate(values), [values]);
     const showError = (field) => touched[field] && errors[field];
 
+    // gestion des changements de champs
     function onChange(e) {
         const { name, value } = e.target;
         setValues((v) => ({ ...v, [name]: value }));
     }
 
+    // gestion du blur (champ touché)
     function onBlur(e) {
         const { name } = e.target;
         setTouched((t) => ({ ...t, [name]: true }));
     }
 
+    // gestion de la soumission du formulaire
     async function handleSubmit(e) {
         e.preventDefault();
         setSuccess(false);
@@ -68,6 +80,7 @@ export default function ContactForm({ artisanId }) {
         // marque tous les champs comme touchés pour afficher les erreurs
         setTouched({ nom: true, email: true, message: true, website: true });
 
+        // validation avant envoi
         const currentErrors = validate(values);
         if (Object.keys(currentErrors).length > 0) {
             setSubmitError("Veuillez corriger les erreurs du formulaire.");
@@ -82,6 +95,7 @@ export default function ContactForm({ artisanId }) {
 
         setSubmitting(true);
 
+        // Envoi des données au backend
         try {
             const res = await fetch(`${API_BASE_URL}/api/artisans/${artisanId}/contact`, {
                 method: "POST",
@@ -113,16 +127,20 @@ export default function ContactForm({ artisanId }) {
                 return;
             }
 
+            // succès
             setSuccess(true);
             setValues({ nom: "", email: "", message: "", website: "" });
             setTouched({});
         } catch {
+            // erreur réseau ou autre
             setSubmitError("Erreur réseau ou serveur. Veuillez réessayer.");
         } finally {
+            // fin de l'envoi
             setSubmitting(false);
         }
     }
 
+    // Rendu du formulaire de contact
     return (
         <section className="contactForm">
             <div className="d-flex flex-column align-items-start gap-2 mb-3">

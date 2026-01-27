@@ -1,3 +1,4 @@
+// Composant affichant un état de chargement avec un message personnalisable
 export default function LoadingState({ message = "Chargement en cours..." }) {
     return (
         <div className="py-4 text-center">

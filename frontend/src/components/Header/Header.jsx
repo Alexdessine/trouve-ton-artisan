@@ -5,11 +5,14 @@ import logo660 from "../../assets/img/logo-660.webp";
 import logo990 from "../../assets/img/logo-990.webp";
 import { fetchCategories } from "../../services/api";
 
+// Composant Header avec navigation et recherche
 export default function Header() {
+    // États locaux pour les catégories, l'ouverture du menu et de la recherche
     const [categories, setCategories] = useState([]);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    // Références et hooks de navigation
     const menuRef = useRef(null);
     const burgerRef = useRef(null);
     const searchRef = useRef(null);
@@ -18,13 +21,16 @@ export default function Header() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Effets pour charger les catégories et gérer les clics en dehors des menus
     useEffect(() => {
         fetchCategories().then(setCategories).catch(() => setCategories([]));
     }, []);
 
+    // Gestion des clics en dehors du menu
     useEffect(() => {
         if (!isMenuOpen) return;
 
+        // Gestion des clics en dehors du menu pour le fermer
         const handleClickOutside = (event) => {
             if (
                 menuRef.current &&
@@ -36,6 +42,7 @@ export default function Header() {
             }
         };
 
+        // Ajout et nettoyage de l'écouteur d'événements
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
@@ -43,10 +50,12 @@ export default function Header() {
         };
     }, [isMenuOpen]);
 
+    // Fermeture du menu à la navigation
     useEffect(() => {
         setIsMenuOpen(false);
     }, [location.pathname]);
 
+    // Gestion des clics en dehors de la recherche
     useEffect(() => {
         if (!isSearchOpen) return;
 
@@ -65,20 +74,24 @@ export default function Header() {
         return () => document.removeEventListener("mousedown", handleClickOutsideSearch);
     }, [isSearchOpen]);
 
+    // Fermeture de la recherche à la navigation
     useEffect(() => {
         setIsSearchOpen(false);
     }, [location.pathname]);
 
-
+    // Fonctions pour ouvrir/fermer le menu et la recherche
     const openSearch = () => {
         setIsSearchOpen((prev) => !prev);
         setIsMenuOpen(false);
     };
+
+    // Ouvre ou ferme le menu
     const openMenu = () => {
         setIsMenuOpen((prev) => !prev);
         setIsSearchOpen(false);
     };
 
+    // Fonction de soumission du formulaire de recherche
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -93,6 +106,7 @@ export default function Header() {
         
     };
 
+    // Rendu du composant Header
     return (
         <header>
             <nav className={`navbar ${isSearchOpen || isMenuOpen ? "active" : ""}`}>
